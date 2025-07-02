@@ -18,7 +18,7 @@ C
 - **SC0130: カート画面**
     - カートに追加されている商品を表示・追加・削除する画面。
 - **SC0140: 注文情報入力画面**
-    - 氏名、配送先住所、電話番号、メールアドレス、支払い情報を入力する画面。
+    - 氏名、配送先住所、電話番号、メールアドレスを入力する画面。
 - **SC0150: 注文情報確認画面**
     - 注文情報入力画面(sc0140)で入力された情報を確認する画面。
 - **SC0160: 注文完了画面**
@@ -33,6 +33,8 @@ C
     - 注文状況を確認する画面。
 - **SC9401: 管理者編集画面**
     - 管理者の登録や編集・削除を行う画面。
+- **SC9501: 在庫数編集画面**
+    - 商品の在庫数を編集する画面。
 - (その他、必要に応じて画面を追加)
 
 ### 4.2. 画面遷移図
@@ -85,8 +87,10 @@ graph TD
 <div class="mermaid">
 graph TD
     J[SC9001: 管理者ログイン画面] -- ログイン --> K(SC9101: 管理者ダッシュボード画面);
-    K -- 商品情報編集 --> L(SC9201: 商品情報追加・編集画面);
+    K -- 商品情報管理選択 --> L(SC9201: 商品情報登録・編集画面);
     L -- ホームに戻る --> K;
+    K -- 在庫管理選択 --> O(SC9501: 商品在庫数管理画面);
+    O -- ホームに戻る --> K;
     K -- 確認 --> M(SC9301: 注文情報確認画面);
     M -- ホームに戻る --> K;
     K -- 確認 --> N(SC9401: 管理者編集画面);
@@ -98,7 +102,9 @@ graph TD
     style J fill:#f9f,stroke:#333,stroke-width:1px,color:#000
     style K fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
     style L fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
-    style M fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000  
+    style M fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000 
+    style N fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000  
+    style O fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000   
 
 </div>
 
