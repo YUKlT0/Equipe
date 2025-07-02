@@ -244,7 +244,7 @@ sequenceDiagram
     画面-->>ユーザー: 注文番号・完了メッセージを表示
 </div>
 
-#### **1. サイトアクセス〜商品閲覧**
+##### **1. サイトアクセス〜商品閲覧**
 
 1. **画面（ユーザー）**  
    ユーザーがブラウザでECサイトにアクセス。トップページや商品一覧ページを開く。
@@ -263,7 +263,7 @@ sequenceDiagram
 5. **アプリケーション（Frontend） → Backend**
    - 選択された商品IDで `PRODUCT` の詳細を取得し、商品詳細ページを表示。
 
-#### **2. カート操作〜注文確認画面**
+##### **2. カート操作〜注文確認画面**
 
 1. **画面（ユーザー）**  
    商品詳細ページで数量を選び、「カートに追加」ボタンをクリック。
@@ -278,7 +278,7 @@ sequenceDiagram
    注文者情報入力フォームが表示される（非会員向け）。
    - 入力内容：氏名、メールアドレス、住所、配送方法。
 
-#### **3. 注文確定処理**
+##### **3. 注文確定処理**
 
 1. **画面（ユーザー）**  
    内容を確認し、「注文を確定する」ボタンをクリック。
@@ -303,6 +303,62 @@ sequenceDiagram
 5. **画面（ユーザー）**  
    注文完了画面を表示（注文番号・注文情報）。
 
+#### 例：商品情報と在庫情報の新規登録（管理者）
+
+##### データフロー（シーケンス図）
+<div class="mermaid">
+sequenceDiagram
+    participant AdminUser as 管理者ユーザー
+    participant Web as 管理者画面
+    participant Backend as バックエンドAPI
+    participant DB as データベース
+
+    %% ログイン処理
+    AdminUser->>Web: 専用URLにアクセスしログイン情報入力
+    Web->>Backend: ログイン認証リクエスト（メールアドレス・パスワード）
+    Backend->>DB: ADMINテーブルにて認証照合
+    DB-->>Backend: 認証結果返却
+    Backend-->>Web: ログイン成功レスポンス
+    Web-->>AdminUser: 管理者ダッシュボード表示
+
+    %% 商品情報登録
+    AdminUser->>Web: 商品マスタ編集画面に遷移
+    Web-->>AdminUser: 商品マスタ登録フォーム表示
+    AdminUser->>Web: 商品情報入力・送信
+    Web->>Backend: 商品登録リクエスト
+    Backend->>DB: PRODUCTテーブルに商品データ追加
+    DB-->>Backend: 登録成功レスポンス
+    Backend-->>Web: 商品登録完了通知
+    Web-->>AdminUser: 商品登録完了メッセージ表示
+
+    %% 在庫情報登録
+    AdminUser->>Web: ダッシュボードに戻る
+    Web-->>AdminUser: ダッシュボード再表示
+    AdminUser->>Web: 在庫管理画面に遷移
+    Web-->>AdminUser: 在庫登録フォーム表示
+    AdminUser->>Web: 在庫情報入力・送信
+    Web->>Backend: 在庫登録リクエスト
+    Backend->>DB: INVENTORYテーブルに在庫データ追加
+    DB-->>Backend: 登録成功レスポンス
+    Backend-->>Web: 在庫登録完了通知
+    Web-->>AdminUser: 在庫登録完了メッセージ表示
+</div>
+
+1. **ログイン処理**
+    - 管理者ユーザーが専用URLにアクセスし、メールアドレスとパスワードを入力してログイン。
+    - バックエンドはADMINテーブルで認証処理を行い、成功時はダッシュボード画面を表示する。
+
+2. **商品情報登録**
+    - 管理者がダッシュボードから商品マスタ編集画面へ遷移。
+    - 商品名・説明・価格・カテゴリなどを入力し、登録フォームを送信。
+    - バックエンドはPRODUCTテーブルに新規商品情報を登録。
+    - 登録完了メッセージが表示される。
+
+3. **在庫情報登録**
+    - 管理者が再度ダッシュボードに戻り、在庫管理画面に遷移。
+    - 商品と在庫数を入力して在庫登録フォームを送信。
+    - バックエンドはINVENTORYテーブルに該当商品の在庫データを登録。
+    - 登録完了メッセージが表示される。
 
 
 
@@ -551,8 +607,96 @@ erDiagram
     - 顧客からの問い合わせ情報を管理。
     - 問い合わせIDを主キーとし、会員ID（会員の場合のみ）、メールアドレス、問い合わせカテゴリ、問い合わせ内容、対応ステータス、問い合わせ日時を保持。
 
-#### データフロー（シーケンス図）
+#### 例：会員による商品のお気に入り登録と購入、注文後の問い合わせと管理者による対応
+
+##### データフロー（シーケンス図）
 <div class="mermaid">
 sequenceDiagram
+    participant User as 会員ユーザー
+    participant Web as 画面
+    participant Backend as バックエンドAPI
+    participant DB as データベース
+    participant Admin as 管理者
 
+    %% 顧客がログイン
+    User->>Web: ログイン画面でメール・パスワード入力
+    Web->>Backend: 認証リクエスト
+    Backend->>DB: CUSTOMER テーブルから認証情報照合
+    DB-->>Backend: 認証結果
+    Backend-->>Web: 認証成功（セッション開始）
+    Web-->>User: マイページ or 商品一覧に遷移
+
+    %% お気に入り登録
+    User->>Web: 商品をお気に入りに登録
+    Web->>Backend: お気に入り登録リクエスト
+    Backend->>DB: FAVORITEテーブルに登録
+    DB-->>Backend: 登録完了
+    Backend-->>Web: 登録成功レスポンス
+    Web-->>User: 登録完了メッセージ表示
+
+    %% 注文処理
+    User->>Web: 注文を作成・送信
+    Web->>Backend: 注文情報送信
+    Backend->>DB: ORDERテーブルに注文登録
+    Backend->>DB: ORDER_DETAILテーブルに注文詳細登録
+    Backend->>DB: INVENTORYテーブルの在庫数更新
+    Backend->>DB: PAYMENT_INFOテーブルに支払い情報登録
+    DB-->>Backend: 登録完了
+    Backend-->>Web: 注文完了レスポンス
+    Web-->>User: 注文完了画面表示
+
+    %% 顧客が問い合わせ送信
+    User->>Web: 問い合わせフォームに入力・送信
+    Web->>Backend: 問い合わせ送信リクエスト
+    Backend->>DB: INQUIRYテーブルに新規登録
+    DB-->>Backend: 登録成功
+    Backend-->>Web: 問い合わせ受付完了
+    Web-->>User: 問い合わせ送信完了画面表示
+    Backend-->>User: 問い合わせ完了通知メール送信
+
+
+    %% 管理者が問い合わせ一覧確認
+    Admin->>Web: 管理者ダッシュボードから問い合わせ一覧を開く
+    Web->>Backend: 問い合わせ一覧取得リクエスト
+    Backend->>DB: INQUIRYテーブルから一覧取得
+    DB-->>Backend: 問い合わせデータ返却
+    Backend-->>Web: 問い合わせ一覧レスポンス
+    Web-->>Admin: 問い合わせ一覧表示
+
+    %% 管理者が問い合わせ内容を確認
+    Admin->>Web: 問い合わせ詳細をクリック
+    Web->>Backend: 問い合わせ詳細取得
+    Backend->>DB: INQUIRYテーブルから詳細取得
+    DB-->>Backend: 詳細データ返却
+    Backend-->>Web: 詳細レスポンス
+    Web-->>Admin: 問い合わせ内容表示
+
+    %% 管理者が返答
+    Admin->>Web: 回答を入力・送信
+    Web->>Backend: 回答登録リクエスト
+    Backend->>DB: INQUIRYテーブルに返答内容・ステータス更新
+    DB-->>Backend: 更新完了
+    Backend-->>Web: 完了通知
+    Web-->>Admin: 回答完了メッセージ表示
+
+    %% 顧客に返答通知
+    Backend-->>User: 返答内容通知メール送信
 </div>
+
+1. **お気に入り登録**
+    - 会員ユーザーは気になる商品をお気に入りに登録する。
+    - WebサイトからバックエンドAPIへ登録リクエストが送信され、FAVORITEテーブルに記録される。
+    - 登録完了後、ユーザーに完了メッセージが表示される。
+
+2. **注文処理**
+    - 会員は購入したい商品を注文画面で選択し注文を確定する。
+    - バックエンドはORDER、ORDER_DETAIL、INVENTORY（在庫数更新）、PAYMENT_INFO（支払い情報）テーブルに対して処理を行う。
+    - 注文完了レスポンスが返され、注文完了画面を表示する。
+
+3. **問い合わせ**
+    - 会員は商品や注文に関する問い合わせをフォームから送信する。
+    - バックエンドはINQUIRYテーブルに問い合わせ内容を登録し、受付完了をユーザーに通知する。
+
+4. **管理者の問い合わせ対応**
+    - 管理者は問い合わせ一覧を取得し、対応状況を確認・更新する。
+    - 対応状況はINQUIRYテーブルに反映され、更新完了レスポンスが管理者に返される。
