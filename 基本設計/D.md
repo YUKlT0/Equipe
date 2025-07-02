@@ -7,12 +7,11 @@
 erDiagram
     CUSTOMER ||--o{ ORDER : "places"
     ORDER ||--|{ ORDER_DETAIL : "has"
+    ORDER ||--|{ PAYMENT : "has"
     ORDER_DETAIL }|--|| PRODUCT : "includes"
     PRODUCT }|--|| CATEGORY : "belongs to"
     PRODUCT ||--o{ PRODUCT_IMAGE : "has"
-    PRODUCT ||--|| INVENTORY : "has"
-    ORDER ||--|| SHIPPING_INFO : "has"
-    SHIPPING_INFO }|--|| SHIPPING_METHOD : "uses"
+    ORDER ||--|| SHIPPING : "has"
     ADMIN ||--o{ ADMIN_LOG : "makes"
 
     CUSTOMER {
@@ -64,12 +63,6 @@ erDiagram
         string カテゴリ名
     }
 
-    INVENTORY {
-        string 在庫ID PK
-        string 商品ID FK
-        int 在庫数
-    }
-
     PRODUCT_IMAGE {
         string 画像ID PK
         string 商品ID FK
@@ -77,22 +70,11 @@ erDiagram
         int 表示順
     }
 
-    SHIPPING_INFO {
+    SHIPPING {
         string 配送ID PK
         string 注文ID FK
-        string 配送方法ID FK
         string 配送先住所
         string 配送ステータス
-        string 追跡番号
-    }
-
-    SHIPPING_METHOD {
-        string 配送方法ID PK
-        string 地域区分
-        string 配送業者
-        string 配送方法名
-        decimal 送料
-        int 所要日数
     }
 
     ADMIN_LOG {
@@ -102,17 +84,16 @@ erDiagram
         datetime 操作日時
     }
 
-    PAYMENT_INFO {
+    PAYMENT {
         string 支払いID PK
         string 注文ID FK
         string 支払い方法
         string 支払い状況
-        string 取引ID
     }
 </div>
 
 - **エンティティ**:  
-  CUSTOMER(顧客), ADMIN(管理者), ORDER(注文), ORDER_DETAIL(注文詳細), PRODUCT(商品), INVENTORY(在庫), PRODUCT_IMAGE(商品画像), CATEGORY(カテゴリ), SHIPPING_INFO(配送情報), SHIPPING_METHOD(配送方法), ADMIN_LOG(管理者ログ)
+  CUSTOMER(顧客), ADMIN(管理者), ORDER(注文), ORDER_DETAIL(注文詳細), PRODUCT(商品), PRODUCT_IMAGE(商品画像), CATEGORY(カテゴリ), SHIPPING(配送情報), ADMIN_LOG(管理者ログ), PAYMENT(決済情報)
 
 - **リレーション**:  
   - 顧客は注文を行う (1対多、CUSTOMER -> ORDER)  
@@ -128,8 +109,8 @@ erDiagram
 
 ### 5.2. 主要テーブル概要
 - **CUSTOMER (顧客テーブル)**
-    - ECサイトの会員および非会員の顧客情報を管理。
-    - 会員IDを主キーとし、会員登録者のみ保持。非会員はNULLまたは未登録の場合あり。
+    - ECサイトの会員情報を管理。
+    - 会員IDを主キーとし、会員登録者のみ保持。
     - 氏名、メールアドレス、ハッシュ化パスワード、住所、登録日時を保持。
     - 会員登録が任意のため、注文時の氏名・住所等は注文テーブルにも保持し、配送情報と連携。
 
@@ -151,12 +132,7 @@ erDiagram
 - **PRODUCT (商品テーブル)**
     - ECサイトで販売する商品の情報を管理。
     - 商品IDを主キーとし、商品名、商品説明、価格、カテゴリID（外部キー）を保持。
-    - 商品画像や在庫情報と関連付ける。
-
-- **INVENTORY (在庫テーブル)**
-    - 商品ごとの在庫数を管理。
-    - 在庫IDを主キーとし、商品IDを外部キーとして紐付け。
-    - 在庫数を保持し、販売可能数の管理に利用。
+    - 商品画像と関連付ける。
 
 - **PRODUCT_IMAGE (商品画像テーブル)**
     - 商品に紐づく複数の画像情報を管理。
@@ -167,15 +143,11 @@ erDiagram
     - 商品の分類情報を管理。
     - カテゴリIDを主キーとし、カテゴリ名を保持。
 
-- **SHIPPING_INFO (配送情報テーブル)**
+- **SHIPPING (配送情報テーブル)**
     - 注文ごとの配送に関する情報を管理。
     - 配送IDを主キー、注文IDと配送方法IDを外部キーとして紐付け。
-    - 配送先住所、配送ステータス、追跡番号を保持。
+    - 配送先住所、配送ステータスを保持。
     - 送料は配送方法テーブルで管理し、注文合計金額に反映される。
-
-- **SHIPPING_METHOD (配送方法テーブル)**
-    - 配送方法ごとの詳細（地域区分、配送業者、送料、所要日数）を管理。
-    - 配送方法IDを主キーとする。
 
 - **ADMIN_LOG (管理者ログテーブル)**
     - 管理者による操作履歴を管理。
@@ -185,8 +157,8 @@ erDiagram
 - **PAYMENT_INFO (支払い情報テーブル)**
     - 注文に紐づく支払い情報を管理（拡張機能）。
     - 支払いIDを主キー、注文IDを外部キーとして紐付け。
-    - 支払い方法、支払い状況、取引IDを保持。
-    - 初期リリースでは振込・代引きを想定し、後にクレジットカード等追加可能。
+    - 支払い方法、支払い状況を保持。
+    - 初期リリースでは振込・代引きを想定。
 
 ### 5.3　データフロー概要
 
