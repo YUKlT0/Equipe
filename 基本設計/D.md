@@ -550,7 +550,6 @@ erDiagram
     INQUIRY {
         string 問い合わせID PK
         string 会員ID FK
-        string 商品ID FK
         string メールアドレス
         string 内容
         datetime 送信日時
