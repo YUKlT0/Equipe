@@ -10,7 +10,7 @@ C
 - **SC0010: 新規会員登録画面**
     - ユーザーID、パスワード、氏名、住所、メールアドレスを登録する画面。
 - **SC0110: 商品一覧画面**
-    - システムに登録されている商品を一覧表示する画面。カテゴリー絞り込み、納期情報の表示などを配置。
+    - システムに登録されている商品を一覧表示する画面。カテゴリー絞り込み、納期情報の表示などを配置。ホーム画面の役割を果たす。
 - **SC0115: カテゴリ別商品一覧画面**
     - ユーザーが選択したカテゴリで絞り込み、商品一覧画面(SC0110)と同様にシステムに登録されている商品を一覧表示する画面。
 - **SC0120: 商品詳細画面**
@@ -51,16 +51,17 @@ graph TD
 
     B -- 自動でログイン --> C;
 
-    A -- ログインしない --> C;
+    A -- ゲストログイン --> C;
 
     C -- カテゴリ選択 --> D(SC0115: カテゴリ別商品一覧画面);
+    D -- カテゴリ解除 --> C;
     D -- 商品選択 --> E(SC0120: 商品詳細画面);
     E -- 一覧へ戻る --> D;
 　
     C -- マイページ選択 --> V(SC0125: マイページ画面);
     V -- 一覧へ戻る --> C;
 
-    V -- 会員情報編集 --> W(SC0128: 会員情報編集画面);
+    V -- 会員情報編集選択 --> W(SC0128: 会員情報編集画面);
     W -- マイページへ戻る --> V;
 
     C -- 商品選択 --> E(SC0120: 商品詳細画面);
@@ -69,31 +70,34 @@ graph TD
     C -- カートを見る --> F(SC0130: カート画面);
     D -- カートを見る --> F;
     E -- カートを見る --> F;
+    F -- 一覧へ戻る --> C;
+    F -- 商品へ戻る --> E;
     
     F -- ログイン --> A;
     A -- 注文に進む --> G;
 
-    F -- 注文に進む --> G(SC0140: 注文情報入力画面);
+    F -- 注文へ進む --> G(SC0140: 注文情報入力画面);
+    G -- カートへ戻る --> F;
     G -- 注文確認 --> H(SC0150: 注文情報確認画面);
     H -- 修正 --> G;
-    H -- 確定 --> I(SC0160: 注文完了画面);
+    H -- 確定させる --> I(SC0160: 注文完了画面);
     I -- 一覧へ戻る --> C;
 
     C -- ログアウト --> A;
     D -- ログアウト --> A;
     E -- ログアウト --> A; 
 
-    style A fill:#f9f,stroke:#333,stroke-width:1px
-    style B fill:#ccf,stroke:#333,stroke-width:1px
-    style C fill:#ccf,stroke:#333,stroke-width:1px
-    style D fill:#ccf,stroke:#333,stroke-width:1px
-    style E fill:#ffcc99,stroke:#333,stroke-width:1px,color:#000
-    style F fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
-    style G fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
-    style H fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
-    style I fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
-    style V fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
-    style W fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
+    style A fill:#cce5ff,stroke:#333,stroke-width:1px
+    style B fill:#cce5ff,stroke:#333,stroke-width:1px
+    style C fill:#d4edda,stroke:#333,stroke-width:1px
+    style D fill:#d4edda,stroke:#333,stroke-width:1px
+    style E fill:#d4edda,stroke:#333,stroke-width:1px,color:#000
+    style F fill:#fff3cd,stroke:#333,stroke-width:1px,color:#000
+    style G fill:#fff3cd,stroke:#333,stroke-width:1px,color:#000
+    style H fill:#fff3cd,stroke:#333,stroke-width:1px,color:#000
+    style I fill:#fff3cd,stroke:#333,stroke-width:1px,color:#000
+    style V fill:#e2d6f3,stroke:#333,stroke-width:1px,color:#000
+    style W fill:#e2d6f3,stroke:#333,stroke-width:1px,color:#000
 
 </div>
 
@@ -101,20 +105,20 @@ graph TD
 graph TD
     J[SC9001: 管理者ログイン画面] -- ログイン --> K(SC9101: 管理者ダッシュボード画面);
     K -- 商品情報管理選択 --> L(SC9201: 商品情報登録・編集画面);
-    L -- ホームに戻る --> K;
-    K -- 確認 --> M(SC9301: 注文情報確認画面);
-    M -- ホームに戻る --> K;
-    K -- 確認 --> N(SC9401: 管理者編集画面);
-    N -- ホームに戻る --> K;
+    L -- ホームへ戻る --> K;
+    K -- 注文情報確認選択 --> M(SC9301: 注文情報確認画面);
+    M -- ホームへ戻る --> K;
+    K -- 管理者編集選択 --> N(SC9401: 管理者編集画面);
+    N -- ホームへ戻る --> K;
     K -- ログアウト --> J;
     L -- ログアウト --> J;
     M -- ログアウト --> J;    
 
-    style J fill:#f9f,stroke:#333,stroke-width:1px,color:#000
-    style K fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
-    style L fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000
-    style M fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000 
-    style N fill:#ffebcc,stroke:#333,stroke-width:1px,color:#000  
+    style J fill:#cce5ff,stroke:#333,stroke-width:1px,color:#000
+    style K fill:#e2e3e5,stroke:#333,stroke-width:1px,color:#000
+    style L fill:#d4edda,stroke:#333,stroke-width:1px,color:#000
+    style M fill:#fff3cd,stroke:#333,stroke-width:1px,color:#000 
+    style N fill:#e2d6f3,stroke:#333,stroke-width:1px,color:#000  
 
 
 </div>
