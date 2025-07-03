@@ -95,10 +95,19 @@ erDiagram
     }
 </div>
 
-- **エンティティ**:  
-  CUSTOMER(顧客), ADMIN(管理者), ORDER(注文), ORDER_DETAIL(注文詳細), PRODUCT(商品), PRODUCT_IMAGE(商品画像), CATEGORY(カテゴリ), SHIPPING(配送情報), ADMIN_LOG(管理者ログ), PAYMENT(決済情報)
+- **エンティティ**
+  - CUSTOMER(顧客)
+  - ADMIN(管理者)
+  - ORDER(注文)
+  - ORDER_DETAIL(注文詳細)
+  - PRODUCT(商品)
+  - PRODUCT_IMAGE(商品画像)
+  - CATEGORY(カテゴリ)
+  - SHIPPING(配送情報)
+  - ADMIN_LOG(管理者ログ)
+  - PAYMENT(決済情報)
 
-- **リレーション**:  
+- **リレーション**
   - 顧客は注文を行う (1対多、CUSTOMER -> ORDER)  
   - 注文は複数の注文詳細を持つ (1対多、ORDER -> ORDER_DETAIL)  
   - 注文詳細は商品を含む (多対1、ORDER_DETAIL -> PRODUCT)  
@@ -400,67 +409,6 @@ sequenceDiagram
 
 ##### データフロー（シーケンス図）
 <div class="mermaid">
-sequenceDiagram
-    participant 管理者
-    participant 管理画面
-    participant フロントエンド
-    participant バックエンド
-    participant DB
-
-    管理者->>管理画面: ログイン画面にアクセス
-    管理画面->>フロントエンド: ログイン情報入力送信
-    フロントエンド->>バックエンド: ログイン認証リクエスト
-    バックエンド->>DB: ADMIN テーブル照合
-    DB-->>バックエンド: 認証結果返却
-    バックエンド-->>フロントエンド: 認証結果返却
-    フロントエンド-->>管理画面: ログイン結果表示（成功ならダッシュボード画面へ）
-
-    管理者->>管理画面: 商品マスタ登録画面に遷移
-    管理画面->>フロントエンド: 商品情報・画像URL入力
-    フロントエンド->>バックエンド: 商品登録リクエスト
-
-    バックエンド->>DB: PRODUCTテーブルへ商品情報登録
-    バックエンド->>DB: PRODUCT_IMAGEテーブルへ画像情報登録
-    バックエンド->>DB: ADMIN_LOG に操作内容登録
-    DB-->>バックエンド: 登録成功レスポンス
-    バックエンド-->>フロントエンド: 登録完了レスポンス
-    フロントエンド-->>管理画面: 商品登録完了表示
-</div>
-
-1. **画面（管理者）**  
-   管理者がログイン画面にアクセスし、IDとパスワードを入力して「ログイン」ボタンをクリック。
-
-2. **アプリケーション（Backend）**  
-   ログイン情報を受け取り、`ADMIN` テーブルで認証。  
-   認証成功の場合は管理者ダッシュボード画面へ遷移。
-
-3. **画面（管理者）**  
-   管理者ダッシュボード画面に遷移し、商品マスタ編集画面へのリンクをクリック。
-
-4. **画面（管理者）**  
-   商品マスタ編集画面で新規商品の情報（商品名、価格、カテゴリ、説明など）を入力し商品画像ファイルと表示順を選択。
-
-5. **アプリケーション（Backend）**  
-   受け取った商品情報を `PRODUCT` テーブルに登録。
-   画像ファイル情報を `PRODUCT_IMAGE` テーブルに登録。
-   操作内容と操作日時を`ADMIN_LOG`テーブルに登録。
-
-6. **データベース（DB）**  
-   `PRODUCT`, `PRODUCT_IMAGE`, `ADMIN_LOG`に情報を登録。
-
-7. **アプリケーション（Backend）**  
-   登録成功の結果を画面に返却。
-
-8. **画面（管理者）**  
-   商品登録完了のメッセージを表示。
-
-
-
-<!-- 拡張機能ありバージョン -->
-### 5.4　拡張機能
-#### 拡張機能（在庫管理・購入履歴・レビュー・お気に入り・問い合わせ）を含む場合
-
-<div class="mermaid">
 erDiagram
     CUSTOMER ||--o{ ORDER : "places"
     ORDER ||--|{ ORDER_DETAIL : "has"
@@ -471,11 +419,14 @@ erDiagram
     ORDER ||--|| SHIPPING : "has"
     ADMIN ||--o{ ADMIN_LOG : "makes"
 
-    PRODUCT ||--o{ STOCK : "has"
+    PRODUCT ||--|| STOCK : "has"
     CUSTOMER ||--o{ PURCHASE_HISTORY : "has"
     CUSTOMER ||--o{ REVIEW : "writes"
     CUSTOMER ||--o{ FAVORITE : "favorites"
     CUSTOMER ||--o{ INQUIRY : "makes"
+    INQUIRY ||--o{ INQUIRY_RESPONSE : "has"
+    ADMIN ||--o{ INQUIRY_RESPONSE : "writes"
+    CUSTOMER ||--o{ INQUIRY_RESPONSE : "writes"
 
     PURCHASE_HISTORY }|--|| ORDER : "refers"
     REVIEW }|--|| PRODUCT : "reviews"
@@ -599,88 +550,101 @@ erDiagram
         string 商品ID FK
         string 内容
         datetime 送信日時
-        string 状態
+        string 対応状態
     }
+
+    INQUIRY_RESPONSE {
+        string 返信ID PK
+        string 問い合わせID FK
+        string 返信者種別
+        string 返信者ID
+        string 内容
+        datetime 返信日時
+    }
+
 </div>
 
+- **エンティティ**
+   - CUSTOMER（顧客）
+   - ADMIN（管理者）
+   - ORDER（注文）
+   - ORDER_DETAIL（注文詳細）
+   - PRODUCT（商品）
+   - CATEGORY（カテゴリ）
+   - PRODUCT_IMAGE（商品画像）
+   - SHIPPING（配送情報）
+   - PAYMENT（決済情報）
+   - ADMIN_LOG（管理者ログ）
+   - INVENTORY（在庫）
+   - REVIEW（レビュー）
+   - FAVORITE（お気に入り）
+   - INQUIRY（問い合わせ）
+   - INQUIRY_RESPONSE（問い合わせ返信）
+  
+- **リレーション**
+  - 顧客は注文を行う（1対多、CUSTOMER → ORDER）  
+  - 注文は複数の注文詳細を持つ（1対多、ORDER →  ORDER_DETAIL）  
+  - 注文詳細は商品を含む（多対1、ORDER_DETAIL → PRODUCT）  
+  - 注文は決済情報を持つ（1対1、ORDER → PAYMENT）  
+  - 注文は配送情報を持つ（1対1、ORDER → SHIPPING）  
+  - 商品はカテゴリに属する（多対1、PRODUCT → CATEGORY）  
+  - 商品は複数の画像を持つ（1対多、PRODUCT → PRODUCT_IMAGE）  
+  - 商品は在庫情報を持つ（1対1、PRODUCT → INVENTORY）  
+  - 顧客は商品にレビューを投稿できる（1対多、CUSTOMER → REVIEW、PRODUCT → REVIEW）  
+  - 顧客は商品をお気に入り登録できる（1対多、CUSTOMER → FAVORITE、PRODUCT → FAVORITE）  
+  - 顧客は問い合わせを送ることができる（1対多、CUSTOMER → INQUIRY）  
+  - 管理者は操作ログを記録する（1対多、ADMIN → ADMIN_LOG）
 
-#### エンティティ
-- CUSTOMER（顧客）
-- ADMIN（管理者）
-- ORDER（注文）
-- ORDER_DETAIL（注文詳細）
-- PRODUCT（商品）
-- CATEGORY（カテゴリ）
-- PRODUCT_IMAGE（商品画像）
-- SHIPPING（配送情報）
-- PAYMENT（決済情報）
-- ADMIN_LOG（管理者ログ）
-- INVENTORY（在庫）
-- REVIEW（レビュー）
-- FAVORITE（お気に入り）
-- INQUIRY（問い合わせ）
+#### 5.4.2 主要テーブル概要
 
-#### リレーション
-- 顧客は注文を行う（1対多、CUSTOMER → ORDER）  
-- 注文は複数の商品を含む（1対多、ORDER → ORDER_DETAIL）  
-- 注文詳細は商品と紐づく（多対1、ORDER_DETAIL → PRODUCT）  
-- 注文には支払い情報が1件紐づく（1対1、ORDER → PAYMENT）  
-- 注文には配送情報が1件紐づく（1対1、ORDER → SHIPPING）  
-- 商品はカテゴリに属する（多対1、PRODUCT → CATEGORY）  
-- 商品は複数の画像を持つ（1対多、PRODUCT → PRODUCT_IMAGE）  
-- 商品には在庫情報が存在する（1対1、PRODUCT → INVENTORY）  
-- 顧客は商品にレビューを投稿できる（1対多、CUSTOMER → REVIEW、PRODUCT → REVIEW）  
-- 顧客は商品をお気に入り登録できる（1対多、CUSTOMER → FAVORITE、PRODUCT → FAVORITE）  
-- 顧客は問い合わせを送ることができる（1対多、CUSTOMER → INQUIRY）  
-- 管理者は操作ログを記録する（1対多、ADMIN → ADMIN_LOG）
+- **CUSTOMER（顧客テーブル）**
+  - 会員ID（PK）、氏名、メールアドレス、ハッシュパスワード、住所、登録日時、メンバーシップを保持。
+  - 非会員の場合は、注文時に入力した情報を注文時にパスワードはNULL、メンバーシップはfalseとして保持。
 
----
+- **ADMIN（管理者テーブル）**
+  - 管理者ID（PK）、氏名、メールアドレス、ハッシュ化パスワード、登録日時を保持。
 
-### 5.2 主要テーブル概要（拡張対応）
+- **ORDER（注文テーブル）**
+  - 注文ID（PK）、会員ID（FK）、氏名、メールアドレス、住所、注文日時、合計金額、注文ステータスを保持。
 
-#### CUSTOMER（顧客テーブル）
-- 会員ID（PK）、氏名、メールアドレス、ハッシュパスワード、住所、登録日時、メンバーシップ（会員フラグ）を保持。
-- 非会員の注文時にも必要情報（氏名・住所・メール）をORDERテーブルに保持。
+- **ORDER_DETAIL（注文詳細テーブル）**
+  - 注文詳細ID（PK）、注文ID（FK）、商品ID（FK）、数量、単価を保持。
 
-#### ADMIN（管理者テーブル）
-- 管理者ID（PK）、氏名、メールアドレス、ハッシュ化パスワード、登録日時を保持。
+- **PRODUCT（商品テーブル）**
+  - 商品ID（PK）、商品名、説明、価格、カテゴリID（FK）を保持。
 
-#### ORDER（注文テーブル）
-- 注文ID（PK）、会員ID（FK）、氏名、メールアドレス、住所、注文日時、合計金額、注文ステータスを保持。
+- **CATEGORY（カテゴリテーブル）**
+  - カテゴリID（PK）、カテゴリ名を保持。
 
-#### ORDER_DETAIL（注文詳細テーブル）
-- 注文詳細ID（PK）、注文ID（FK）、商品ID（FK）、数量、単価を保持。
+- **PRODUCT_IMAGE（商品画像テーブル）**
+  - 画像ID（PK）、商品ID（FK）、画像URL、表示順を保持。
 
-#### PRODUCT（商品テーブル）
-- 商品ID（PK）、商品名、説明、価格、カテゴリID（FK）を保持。
+- **INVENTORY（在庫テーブル）**
+  - 在庫ID（PK）、商品ID（FK）、在庫数、更新日時を保持。
+  - 商品との1対1関係を持ち、購入時に自動減少。
+  - 入荷の場合は管理画面から在庫数を入力。
 
-#### CATEGORY（カテゴリテーブル）
-- カテゴリID（PK）、カテゴリ名を保持。
+- **SHIPPING（配送情報テーブル）**
+  - 配送ID（PK）、注文ID（FK）、配送先氏名、住所、送料、配送ステータスを保持。
 
-#### PRODUCT_IMAGE（商品画像テーブル）
-- 画像ID（PK）、商品ID（FK）、画像URL、表示順を保持。
+- **PAYMENT（決済情報テーブル）**
+  - 支払いID（PK）、注文ID（FK）、支払い方法、支払い状況を保持。
 
-#### INVENTORY（在庫テーブル）
-- 在庫ID（PK）、商品ID（FK）、在庫数、更新日時を保持。
-- 商品との1対1関係を持ち、購入時に減少、管理画面で入荷・補充が可能。
+- **REVIEW（レビュー情報テーブル）**
+  - レビューID（PK）、会員ID（FK）、商品ID（FK）、評価（数値）、コメント、投稿日を保持。
+  - 会員1名につき同一商品へのレビューは1件までを原則とする。
 
-#### SHIPPING（配送情報テーブル）
-- 配送ID（PK）、注文ID（FK）、配送先氏名、住所、送料、配送ステータスを保持。
+- **FAVORITE（お気に入りテーブル）**
+  - お気に入りID（PK）、会員ID（FK）、商品ID（FK）、登録日時を保持。
+  - 重複登録を防ぐため、会員ID × 商品ID にユニーク制約を付与可能。
 
-#### PAYMENT（決済情報テーブル）
-- 支払いID（PK）、注文ID（FK）、支払い方法、支払い状況を保持。
+- **INQUIRY（問い合わせテーブル）**
+  - 問い合わせID（PK）、会員ID（FK, NULL許容）、メールアドレス、問い合わせカテゴリ、内容、対応ステータス、問い合わせ日時を保持。
+  - 未ログインのユーザーも問い合わせ可能。
+  
+- **INQUIRY_RESPONSE（問い合わせ返信テーブル）**
+  - 返信ID（PK）、問い合わせID（FK）、返信者種別（"admin"または"customer"）、返信者ID、内容、返信日時。
+  - 問い合わせに対する複数の返信を保持し、顧客・管理者双方が返信可能。
 
-#### REVIEW（レビュー情報テーブル）
-- レビューID（PK）、会員ID（FK）、商品ID（FK）、評価（数値）、コメント、投稿日を保持。
-- 会員1名につき同一商品へのレビューは1件までを原則とする（UI・DB制約で制御可能）。
-
-#### FAVORITE（お気に入りテーブル）
-- お気に入りID（PK）、会員ID（FK）、商品ID（FK）、登録日時を保持。
-- 重複登録を防ぐため、会員ID × 商品ID にユニーク制約を付与可能。
-
-#### INQUIRY（問い合わせテーブル）
-- 問い合わせID（PK）、会員ID（FK, NULL許容）、メールアドレス、問い合わせカテゴリ、内容、対応ステータス、問い合わせ日時を保持。
-- 未ログインのユーザーも問い合わせ可能。
-
-#### ADMIN_LOG（管理者ログテーブル）
-- ログID（PK）、管理者ID（FK）、操作内容、操作日時を保持。
+- **ADMIN_LOG（管理者ログテーブル）**
+  - ログID（PK）、管理者ID（FK）、操作内容、操作日時を保持。
