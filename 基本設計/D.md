@@ -435,7 +435,6 @@ erDiagram
     PURCHASE_HISTORY }|--|| ORDER : "refers"
     REVIEW }|--|| PRODUCT : "reviews"
     FAVORITE }|--|| PRODUCT : "favorites"
-    INQUIRY ||--|| PRODUCT : "about"
 
     CUSTOMER {
         string 会員ID PK
@@ -551,7 +550,7 @@ erDiagram
     INQUIRY {
         string 問い合わせID PK
         string 会員ID FK
-        string 商品ID FK
+        string メールアドレス
         string 内容
         datetime 送信日時
         string 対応状態
@@ -587,16 +586,21 @@ erDiagram
 - **リレーション**
   - 顧客は注文を行う（1対多、CUSTOMER → ORDER）  
   - 注文は複数の注文詳細を持つ（1対多、ORDER →  ORDER_DETAIL）  
+  - 注文は配送情報を持つ（1対1、ORDER → SHIPPING） 
+  - 注文は決済情報を持つ（1対1、ORDER → PAYMENT） 
   - 注文詳細は商品を含む（多対1、ORDER_DETAIL → PRODUCT）  
-  - 注文は決済情報を持つ（1対1、ORDER → PAYMENT）  
-  - 注文は配送情報を持つ（1対1、ORDER → SHIPPING）  
   - 商品はカテゴリに属する（多対1、PRODUCT → CATEGORY）  
   - 商品は複数の画像を持つ（1対多、PRODUCT → PRODUCT_IMAGE）  
   - 商品は在庫情報を持つ（1対1、PRODUCT → INVENTORY）  
+  - 顧客は購入履歴を持つ（1対多、CUSTOMER → PURCHASE_HISTORY）
+  - 購入履歴は注文を参照する（多対1、PURCHASE_HISTORY → ORDER）
   - 顧客は商品にレビューを投稿できる（1対多、CUSTOMER → REVIEW、PRODUCT → REVIEW）  
   - 顧客は商品をお気に入り登録できる（1対多、CUSTOMER → FAVORITE、PRODUCT → FAVORITE）  
   - 顧客は問い合わせを送ることができる（1対多、CUSTOMER → INQUIRY）  
   - 管理者は操作ログを記録する（1対多、ADMIN → ADMIN_LOG）
+  - 管理者は問い合わせに返答することができる（1対多、ADMIN → INQUIRY_RESPONSE）
+  - 顧客は管理者の返答にさらに返答できる（1対多、CUSTOMER → INQUIRY_RESPONSE）
+  - 
 
 #### 5.4.2 主要テーブル概要
 
