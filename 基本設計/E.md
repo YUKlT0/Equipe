@@ -129,12 +129,12 @@ E
 
 ### 8.1. 使用技術スタック
 
-- **言語**: Java 17（※変更）  
-- **フレームワーク**: Laravel 10.x（※変更に伴い検討中）  
+- **言語**: Java 17  
+- **フレームワーク**: Spring Boot 3.x  
 - **データベース**: MySQL 8.0  
 - **フロントエンド**: HTML5, CSS3, JavaScript(ES6)  
 - **Webサーバー**: Nginx  
-- **その他ライブラリ**: Laravel標準パッケージを中心に選定予定（Java移行後は代替技術を検討）  
+- **その他ライブラリ**: Spring Boot標準のスターターやSpring Data JPA等を中心に選定予定    
 
 ### 8.2. インフラ環境
 
@@ -195,7 +195,7 @@ E
 | **ER図**             | Entity-Relationship Diagram。システム内のエンティティ（表）とその関係を図示するモデル。 |
 | **HTTP / HTTPS**     | Hypertext Transfer Protocol。HTTPSはTLSで暗号化されたHTTP通信。API 呼び出しや画面表示に使用。 |
 | **JSON**             | JavaScript Object Notation。軽量なデータ交換フォーマット。REST API の入出力によく使われる。 |
-| **Laravel**          | PHP 製の Web アプリケーションフレームワーク。本システムのバックエンド開発に使用。 |
+| Spring Boot      | Java製のWebアプリケーションフレームワーク。本システムのバックエンド開発に使用。 |
 | **RDBMS**            | Relational Database Management System。関係データベース管理システム。MySQL 8.0 を利用。 |
 | **REST API**         | Representational State Transfer に基づく API。HTTP メソッドで操作を行う。 |
 | **SSO**              | Single Sign-On。一度のログインで複数の関連サービスにアクセス可能とする仕組み。 |
