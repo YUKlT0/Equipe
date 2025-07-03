@@ -48,47 +48,57 @@
 
 ### 2.3. システム構成図
 
+
+
 <div class="mermaid">
 graph LR
-  subgraph クライアント環境
-    PC[クライアントPC<br>（ブラウザ: Chrome/Edge）]
-    SP[スマートフォン<br>（Safari/Chrome）]
-  end
+  subgraph クライアント環境
+    PC[PCブラウザ<br>（Chrome / Edge）]
+    SP[スマートフォン<br>（Safari / Chrome）]
 
-  subgraph サーバー環境
-    WEB[ECサイト Web/APサーバー]
-    DB[データベースサーバー（在庫情報等）]
-    FILE[ファイルサーバー<br>（商品画像等）]
-    AUTH[認証サーバー<br>（オプション: SSO/AD連携）]
-  end
+  end
 
-  PC -->|HTTPS| WEB
-  SP -->|HTTPS| WEB
-  WEB -->|内部接続| DB
-  WEB -->|画像取得| FILE
-  WEB -->|認証連携| AUTH
+  
+INTERNET[インターネット]
 
-  style PC fill:#ffffcc,stroke:#333,stroke-width:1px
-  style SP fill:#ffffcc,stroke:#333,stroke-width:1px
-  style WEB fill:#cce5ff,stroke:#333,stroke-width:2px
-  style DB fill:#ccffcc,stroke:#333,stroke-width:1px
-  style FILE fill:#eeeeee,stroke:#333,stroke-width:1px
-  style AUTH fill:#ffcc99,stroke:#333,stroke-width:1px 
+
+  subgraph AWS環境[（クラウド）]
+    LB[ALB （ロードバランサ）]
+    WEB[Web/APサーバ　<br>（Laravel / PHP-FPM）]
+    DB[DBサーバ<br>（MySQL 8.0）]
+    FS[ファイルストレージ<br>（S3等）]
+    WAF[WAF<br>（AWS WAF / Cloudflare）]
+  end
+
+
+  PC -->|HTTPS| INTERNET -->|TLS通信| WAF --> LB --> WEB
+  SP -->|HTTPS| INTERNET
+
+  WEB -->|API / DB接続| DB
+  WEB -->|画像取得・保存| FS
+
+  style PC fill:#ffffcc,stroke:#333,stroke-width:1px
+  style SP fill:#ffffcc,stroke:#333,stroke-width:1px
+  style INTERNET fill:#eee,stroke:#999,stroke-width:1px,stroke-dasharray: 5 5
+  style WAF fill:#ffcc99,stroke:#333,stroke-width:1px
+  style LB fill:#cce5ff,stroke:#333,stroke-width:2px
+  style WEB fill:#cce5ff,stroke:#333,stroke-width:2px
+  style DB fill:#ccffcc,stroke:#333,stroke-width:1px
+  style FS fill:#eeeeee,stroke:#333,stroke-width:1px
+
 </div>
 
-- **クライアント**: 
-PC（Chrome/Edge）あるいはスマートフォン（Safari/Chrome）
+- **クライアント環境**: 
+PCブラウザ（Chrome/Edge）あるいはスマートフォン（Safari/Chrome）
 
-- **サーバー環境**:
+- **クラウド**:
 Web/APサーバー：ECサイトのアプリケーションをホスト
 DBサーバー：商品情報、注文情報などを管理
-ファイルサーバー（オプション）：商品画像などの静的ファイルを格納
-認証サーバー（オプション）：SSOやAD連携による認証処理
+ファイルストレージ（オプション）：商品画像などの静的ファイルを格納
 
-- **ネットワーク**:
+- **インターネット**:
 クライアントからWebサーバーへはHTTPS通信
 Webサーバーから各サーバーへは内部接続
-
 
 ### 2.4. 外部インターフェース概要
 
@@ -99,3 +109,4 @@ Webサーバーから各サーバーへは内部接続
 - **認証サーバー（オプション）**  
   - 将来的にSSO（シングルサインオン）や社内AD連携を検討。
   - 管理者ログインの利便性向上を目的とする。
+
