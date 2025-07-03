@@ -450,7 +450,7 @@ erDiagram
         string 管理者ID PK
         string 氏名
         string メールアドレス
-        string パスワード
+        string ハッシュパスワード
         datetime 登録日時
     }
 
