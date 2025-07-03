@@ -102,7 +102,7 @@ erDiagram
 - **ADMIN (管理者テーブル)**
     - ECサイトの管理者情報を管理。
     - 管理者IDを主キーとして管理。
-    - 氏名、メールアドレス、パスワード（ハッシュ化）、登録日時を保持。
+    - 氏名、メールアドレス、ハッシュ化パスワード、登録日時を保持。
 
 - **ORDER (注文テーブル)**
     - 顧客の注文情報を管理。
@@ -423,7 +423,7 @@ erDiagram
     ORDER ||--|| SHIPPING : "has"
     ADMIN ||--o{ ADMIN_LOG : "makes"
 
-    PRODUCT ||--|| STOCK : "has"
+    PRODUCT ||--|| INVENTORY : "has"
     CUSTOMER ||--o{ PURCHASE_HISTORY : "has"
     CUSTOMER ||--o{ REVIEW : "writes"
     CUSTOMER ||--o{ FAVORITE : "favorites"
@@ -517,7 +517,7 @@ erDiagram
         string 決済状況
     }
 
-    STOCK {
+    INVENTORY {
         string 在庫ID PK
         string 商品ID FK
         int 在庫数
@@ -610,7 +610,7 @@ erDiagram
 - **ADMIN（管理者テーブル）**
     - ECサイトの管理者情報を管理。
     - 管理者IDを主キーとして管理。
-    - 氏名、メールアドレス、パスワード（ハッシュ化）、登録日時を保持。
+    - 氏名、メールアドレス、ハッシュ化パスワード、登録日時を保持。
 
 - **ORDER（注文テーブル）**
     - 顧客の注文情報を管理。
@@ -649,7 +649,7 @@ erDiagram
 - **PAYMENT（決済情報テーブル）**
     - 注文に紐づく支払い情報を管理。
     - 決済IDを主キー、注文IDを外部キーとして紐付け。
-    - 決済方法、決済状況を保持。
+    - 決済方法、決済ステータスを保持。
     - 初期リリースでは振込・代引きを想定。
 
 - **REVIEW（レビュー情報テーブル）**
@@ -661,7 +661,7 @@ erDiagram
   - 重複登録を防ぐため、会員ID × 商品ID にユニーク制約を付与可能。
 
 - **INQUIRY（問い合わせテーブル）**
-  - 問い合わせID（PK）、会員ID（FK, NULL許容）、メールアドレス、問い合わせカテゴリ、内容、対応ステータス、問い合わせ日時を保持。
+  - 問い合わせID（PK）、会員ID（FK, NULL許容）、メールアドレス、内容、対応ステータス、問い合わせ日時を保持。
   - 未ログインのユーザーも問い合わせ可能。
   
 - **INQUIRY_RESPONSE（問い合わせ返信テーブル）**
