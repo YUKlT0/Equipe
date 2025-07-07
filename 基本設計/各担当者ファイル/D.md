@@ -15,78 +15,78 @@ erDiagram
     CART_ITEM }|--|| PRODUCT : "references"
 
     CUSTOMER {
-        string "会員ID" PK
-        string 氏名
-        string メールアドレス
-        string ハッシュパスワード
-        string 住所
-        datetime 登録日時
-        boolean メンバーシップ
+        string user_id PK "会員ID"
+        string user_name "氏名"
+        string user_email "メールアドレス"
+        string user_password "ハッシュパスワード"
+        string user_address "住所"
+        datetime user_date "登録日時"
+        boolean membership "メンバーシップ"
     }
 
     ADMIN {
-        string 管理者ID PK
-        string 氏名
-        string メールアドレス
-        string ハッシュパスワード
-        string 登録日時
+        string admin_id PK "管理者ID"
+        string admin_name "管理者氏名"
+        string admin_email "管理者メールアドレス"
+        string admin_password"管理者ハッシュパスワード"
+        string admin_date"登録日時"
     }
 
     ORDER {
-        string 注文ID PK
-        string 会員ID FK
-        string 購入者氏名
-        string 購入者メールアドレス
-        string 購入者住所
-        datetime 注文日時
-        string 配送先氏名
-        string 配送先住所
-        decimal 送料
-        decimal 合計金額
-        string 決済方法
-        string 注文ステータス
+        string order_id PK "注文ID"
+        string user_id FK "会員ID"
+        string buyer_name "購入者氏名"
+        string buyer_email "購入者メールアドレス"
+        string buyer_address "購入者住所"
+        datetime order_date "注文日時"
+        string ship_name "配送先氏名"
+        string ship_address "配送先住所"
+        decimal ship_fee "送料"
+        decimal total_price "合計金額"
+        string pay_method "決済方法"
+        string order_status"注文ステータス"
     }
 
     ORDER_DETAIL {
-        string 注文詳細ID PK
-        string 注文ID FK
-        string 商品ID FK
-        int 数量
-        decimal 単価
+        string detail_id PK "注文詳細ID"
+        string order_id FK "注文ID"
+        string product_id FK "商品ID"
+        int detail_quantity "数量"
+        decimal unit_price "単価"
     }
 
     PRODUCT {
-        string 商品ID PK
-        string 商品名
-        string 商品説明
-        decimal 価格
-        string カテゴリID FK
+        string product_id PK "商品ID"
+        string product_name "商品名"
+        string discription "商品説明"
+        decimal product_price "価格"
+        string category_id FK "カテゴリID" 
     }
 
     CATEGORY {
-        string カテゴリID PK
-        string カテゴリ名
+        string category_id PK "カテゴリID" 
+        string category_name "カテゴリ名"
     }
 
     PRODUCT_IMAGE {
-        string 画像ID PK
-        string 商品ID FK
-        string 画像URL
-        int 表示順
+        string image_id PK "画像ID"
+        string product_id FK "商品ID"
+        string image_url "画像URL"
+        int sort "表示順"
     }
 
     CART {
-        string カートID PK
-        string 会員ID FK 
-        datetime 作成日時
-        datetime 更新日時
+        string cart_id PK "カートID"
+        string user_id FK "会員ID" 
+        datetime create "作成日時"
+        datetime update "更新日時"
     }
 
     CART_ITEM {
-        string カート商品ID PK
-        string カートID FK
-        string 商品ID FK
-        int 数量
+        string cart_item PK "カート商品ID"
+        string cart_id FK "カートID"
+        string product_id FK "商品ID"
+        int cart_quantitiy "数量"
     }
 
 </div>
