@@ -58,7 +58,7 @@ erDiagram
     PRODUCT {
         string product_id PK "商品ID"
         string product_name "商品名"
-        string discription "商品説明"
+        string description "商品説明"
         bigdecimal product_price "価格"
         string category_id FK "カテゴリID" 
     }
