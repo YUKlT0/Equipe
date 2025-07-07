@@ -1,6 +1,5 @@
-# シンプル雑貨オンライン詳細設計書（必須機能のみ）
+# シンプル雑貨オンライン詳細設計書
 
-※本バージョンは、基本設計の中から必須機能（商品閲覧、カート操作、非会員としての注文確定）の実装に絞った構成としています。
 
 | ドキュメントバージョン | 1.0                                   |
 | :------------------- | :------------------------------------ |
@@ -42,34 +41,35 @@
 
 <div class="mermaid">
 graph LR
-    subgraph ユーザー環境
-        A[クライアント<br>（PC/スマホ ブラウザ）<br>HTML/CSS/JavaScript]
-    end
+  subgraph クライアント環境
+    PC[PCブラウザ<br>（Chrome / Edge）]
+    SP[スマートフォン<br>（Safari / Chrome）]
 
-    subgraph "バックエンド (ローカル or AWS)"
-        subgraph "APIサーバー (Spring Boot)"
-            direction LR
-            B[Controller<br>] --> C(Service<br>);
-            C --> D(Repository<br>);
-        end
-        subgraph DBサーバー
-            E[データベース<br>（H2 / PostgreSQLなど）]
-        end
-        D --> E;
-    end
+  end
 
-    A -- ① APIリクエスト<br>(HTTP GET, POST...) --> B;
-    B -- ② 処理依頼 --> C;
-    C -- ③ データアクセス --> D;
-    D -- ④ SQL実行 --> E;
-    E -- ⑤ データ --> D;
-    D -- ⑥ データ --> C;
-    C -- ⑦ 処理結果 --> B;
-    B -- ⑧ APIレスポンス<br>(JSONデータ) --> A;
+INTERNET[インターネット]
 
-    style A fill:#lightyellow,stroke:#333,stroke-width:1px
-    style B fill:#lightblue,stroke:#333,stroke-width:1px
-    style C fill:#lightgreen,stroke:#333,stroke-width:1px
-    style D fill:#lightcoral,stroke:#333,stroke-width:1px
-    style E fill:#lightgrey,stroke:#333,stroke-width:1px
+  subgraph AWS環境[（クラウド）]
+    LB[ALB （ロードバランサ）]
+    WEB[Web/APサーバ　`<br>`（Java）]
+    DB[DBサーバ`<br>`（MySQL 8.0）]
+    FS[ファイルストレージ`<br>`（S3等）]
+    WAF[WAF`<br>`（AWS WAF / Cloudflare）]
+  end
+
+  PC -->|HTTPS| INTERNET -->|TLS通信| WAF --> LB --> WEB
+  SP -->|HTTPS| INTERNET
+
+  WEB -->|API / DB接続| DB
+  WEB -->|画像取得・保存| FS
+
+  style PC fill:#ffffcc,stroke:#333,stroke-width:1px
+  style SP fill:#ffffcc,stroke:#333,stroke-width:1px
+  style INTERNET fill:#eee,stroke:#999,stroke-width:1px,stroke-dasharray: 5 5
+  style WAF fill:#ffcc99,stroke:#333,stroke-width:1px
+  style LB fill:#cce5ff,stroke:#333,stroke-width:2px
+  style WEB fill:#cce5ff,stroke:#333,stroke-width:2px
+  style DB fill:#ccffcc,stroke:#333,stroke-width:1px
+  style FS fill:#eeeeee,stroke:#333,stroke-width:1px
+
 </div>
