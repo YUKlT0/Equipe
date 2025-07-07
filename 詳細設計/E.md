@@ -15,9 +15,7 @@
 | DB               | PostgreSQL 15                 |
 | DB接続ドライバ      | PostgreSQL JDBC Driver 42.x   |
 | メッセージキュー     | RabbitMQ 3.11                 |
-| キャッシュ          | Redis 7.0                    |
-| コンテナ環境       | Docker 23.0                  |
-| CI/CD            | GitHub Actions               |
+| キャッシュ          | Redis 7.0                    |              |
 
 ---
 
