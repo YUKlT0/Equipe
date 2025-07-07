@@ -41,8 +41,8 @@ erDiagram
         datetime order_date "注文日時"
         string ship_name "配送先氏名"
         string ship_address "配送先住所"
-        decimal ship_fee "送料"
-        decimal total_price "合計金額"
+        bigdecimal ship_fee "送料"
+        bigdecimal total_price "合計金額"
         string pay_method "決済方法"
         string order_status"注文ステータス"
     }
@@ -59,7 +59,7 @@ erDiagram
         string product_id PK "商品ID"
         string product_name "商品名"
         string discription "商品説明"
-        decimal product_price "価格"
+        bigdecimal product_price "価格"
         string category_id FK "カテゴリID" 
     }
 
