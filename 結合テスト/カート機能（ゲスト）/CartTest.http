@@ -1,0 +1,134 @@
+### 2-1
+POST http://localhost:8080/api/cart
+content-type: application/json
+
+{
+    "productId": 1, 
+    "quantity": 2
+}
+
+### 2-2
+POST http://localhost:8080/api/cart
+content-type: application/json
+
+{
+    "productId": 1, 
+    "quantity": 1
+}
+
+### 2-3
+POST http://localhost:8080/api/cart
+content-type: application/json
+
+{
+    "productId": 2, 
+    "quantity": 1
+}
+
+### 2-4
+PUT http://localhost:8080/api/cart/items/1
+content-type: application/json
+
+{
+    "itemId": 1, 
+    "quantity": 5
+}
+
+### 2-5
+DELETE http://localhost:8080/api/cart/items/1
+content-type: application/json
+
+{
+    "itemId": 1, 
+}
+
+### 2-6
+GET http://localhost:8080/api/cart
+
+{
+    
+}
+
+### 2-7
+GET http://localhost:8080/api/cart
+
+{
+    
+}
+
+### 2-8
+GET http://localhost:8080/api/cart
+
+{
+    
+}
+
+### 2-9
+POST http://localhost:8080/api/cart
+
+{
+    
+}
+
+### 2-10
+POST http://localhost:8080/api/cart
+
+{    
+    "productId": 1, 
+    "quantity": -1,
+    }
+
+### 2-11
+POST http://localhost:8080/api/cart
+
+{    
+    "productId": 1, 
+    "quantity": null,
+    }
+
+### 2-12
+POST http://localhost:8080/api/cart
+
+{    
+    "productId": null, 
+    "quantity": 1,
+    }
+
+### 2-13
+POST http://localhost:8080/api/cart/items/1
+
+{    
+    "itemId": 1, 
+    "quantity": 0,
+    }
+
+### 2-14
+PUT http://localhost:8080/api/cart/items/1
+
+{    
+    "itemId": 1, 
+    "quantity": -1,
+    }
+
+### 2-15
+PUT http://localhost:8080/api/cart/items/1
+
+{    
+    "itemId": 1, 
+    "quantity": null,
+    }
+
+### 2-16
+PUT http://localhost:8080/api/cart/items/999
+
+{    
+    "itemId": 999, 
+    "quantity": 5,
+    }
+
+### 2-17
+DELETE  http://localhost:8080/api/cart/items/999
+
+{    
+    "itemId": 999, 
+    }
