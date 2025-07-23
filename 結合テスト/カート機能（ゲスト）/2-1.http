@@ -1,9 +1,0 @@
-### 2-1
-POST http://localhost:8080/api/cart
-content-type: application/json
-
-{
-    "productId": 1, 
-    "quantity": 2
-}
-
