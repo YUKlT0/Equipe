@@ -1,0 +1,10 @@
+HTTP/1.1 500 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 07:38:25 GMT
+Connection: close
+
+{
+  "message": "Method parameter 'productId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; For input string: \"abc\""
+}
