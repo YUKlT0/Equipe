@@ -1,0 +1,23 @@
+HTTP/1.1 200 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 08:47:33 GMT
+Connection: close
+
+[
+  {
+    "adminId": "b3ff11cd-2ede-4327-b64e-8f9233c9d871",
+    "adminName": "管理者 太郎",
+    "adminEmail": "admin@example.com",
+    "adminPassword": "adminpass",
+    "adminDate": "2025-07-23T17:45:33.46627"
+  },
+  {
+    "adminId": "03220672-9a2f-4a49-81c3-aab638d59a44",
+    "adminName": "管理者 花子",
+    "adminEmail": "admin2@example.com",
+    "adminPassword": "adminpass",
+    "adminDate": "2025-07-23T17:45:33.476268"
+  }
+]

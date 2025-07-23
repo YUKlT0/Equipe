@@ -1,0 +1,140 @@
+###　トークン生成
+POST http://localhost:8080/api/auth/login
+content-type: application/json
+
+{
+    "loginEmail": "mailA@test.com",
+    "loginPass": "testpassA"
+}
+
+### カート取得
+GET http://localhost:8080/api/usercart?userId=1
+
+### 商品をカートに追加（商品A）
+POST http://localhost:8080/api/usercart?userId=1
+content-type: application/json
+
+{
+    "productId": 1,
+    "quantity": 1
+}
+
+### 商品をカートに追加（商品B）
+POST http://localhost:8080/api/usercart?userId=1
+content-type: application/json
+
+{
+    "productId": 2,
+    "quantity": 1
+}
+
+### 商品の数量変更
+PUT http://localhost:8080/api/usercart/items/1?userId=1
+content-type: application/json
+
+{
+    "quantity": 2
+}
+
+### カート内商品の削除
+DELETE http://localhost:8080/api/usercart/items/1?userId=1
+
+### 商品をカートに追加（存在しない商品）
+POST http://localhost:8080/api/usercart?userId=1
+content-type: application/json
+
+{
+    "productId": 100,
+    "quantity": 1
+}
+
+### 商品をカートに追加（数量ゼロ）
+POST http://localhost:8080/api/usercart?userId=1
+content-type: application/json
+
+{
+    "productId": 1,
+    "quantity": 0
+}
+
+### 商品をカートに追加（数量負数）
+POST http://localhost:8080/api/usercart?userId=1
+content-type: application/json
+
+{
+    "productId": 1,
+    "quantity": -1
+}
+
+### 商品をカートに追加（数量null）
+POST http://localhost:8080/api/usercart?userId=1
+content-type: application/json
+
+{
+    "productId": 1,
+    "quantity": null
+}
+
+### 商品をカートに追加（商品IDnull）
+POST http://localhost:8080/api/usercart?userId=1
+content-type: application/json
+
+{
+    "productId": null,
+    "quantity": 1
+}
+
+### 商品の数量変更（数量ゼロ）
+PUT http://localhost:8080/api/usercart/items/1?userId=1
+content-type: application/json
+
+{
+    "quantity": 0
+}
+
+### 商品の数量変更（数量負数）
+PUT http://localhost:8080/api/usercart/items/1?userId=1
+content-type: application/json
+
+{
+    "quantity": -1
+}
+
+### 商品の数量変更（数量null）
+PUT http://localhost:8080/api/usercart/items/1?userId=1
+content-type: application/json
+
+{
+    "quantity": null
+}
+
+### 商品の数量変更（存在しない商品ID）
+PUT http://localhost:8080/api/usercart/items/100?userId=1
+content-type: application/json
+
+{
+    "quantity": 2
+}
+
+### カート内商品の削除（存在しない商品ID）
+DELETE http://localhost:8080/api/usercart/items/100?userId=1
+
+### 注文
+POST http://localhost:8080/api/orders
+content-type: application/json
+
+
+{"customerInfo":{
+        "customerName": "テスト",
+        "customerAddress": "購入者住所",
+        "customerEmail": "t@e.com",
+        "shippingName": "配送先氏名",
+        "shippingAddress": "住所",
+        "payMethod": "cod"},
+  "items": [
+    {
+        "productId": 7,
+        "quantity": 6
+    }
+  ]
+}
