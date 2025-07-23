@@ -1,0 +1,26 @@
+##5-1
+### カートに商品を追加（先にこれを実行する）
+POST http://localhost:8080/api/cart/add?userId=1
+Content-Type: application/json
+
+{
+  "productId": 7,
+  "quantity": 6
+}
+
+### 注文を実行（商品がカートに入った状態で）
+POST http://localhost:8080/api/user/orders?userId=1
+Content-Type: application/json
+
+{
+  "customerInfo": {
+    "customerName": "消費者　太郎",
+    "customerAddress": "購入者住所",
+    "customerEmail": "t@e.com",
+    "shippingName": "配送先氏名",
+    "shippingAddress": "住所",
+    "payMethod": "cod"
+  }
+}
+
+GET /api/cart?userId=1
