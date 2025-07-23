@@ -1,0 +1,14 @@
+HTTP/1.1 200 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 08:55:21 GMT
+Connection: close
+
+{
+  "adminId": "0b04e2d2-0596-4480-8b07-b1cc9a4aa424",
+  "adminName": "新規管理者",
+  "adminEmail": "newadmin@example.com",
+  "adminPassword": "newpassword",
+  "adminDate": "2025-07-23T17:55:21.4683794"
+}

@@ -1,0 +1,104 @@
+### No. 6-1 ログイン（正常系）
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "userEmail": "user@example.com",
+  "userPassword": "userpass"
+}
+
+###
+
+### 6-2: 新規会員登録
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "registerEmail": "newuser@example.com",  
+  "registerPassword": "newpassword123",  
+  "registerName": "新規 太郎",  
+  "registerAddress": "京都府京都市"
+}
+
+
+###
+
+### No. 6-3 登録済みの氏名・住所はそのまま、メールアドレスのみ変更して登録要求（正常系）
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "registerEmail": "newnewuser@example.com",  
+  "registerPassword": "newpassword123",  
+  "registerName": "新規 太郎",  
+  "registerAddress": "京都府京都市"
+}
+
+###
+
+### No. 6-4 マイページ（正常系）
+GET http://localhost:8080/api/user/mypage
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzUzMjY3NDA0fQ.ytNBLTT6VmLnA4rl5xRrC3XE1-2tUY5o7WpZO6HYxRI
+
+###
+
+### No. 6-5 ログアウト（正常系）
+POST http://localhost:8080/api/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzUzMjY3NDA0fQ.ytNBLTT6VmLnA4rl5xRrC3XE1-2tUY5o7WpZO6HYxRI
+
+###
+
+### No. 6-6 存在しないメールアドレスでログイン要求（異常系）
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "userEmail": "notfound@example.com",
+  "userPassword": "userpass"
+}
+
+###
+
+### No. 6-7 間違ったパスワードでログイン要求（異常系）
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "userEmail": "user@example.com",
+  "userPassword": "wrongPassword"
+}
+
+###
+
+### No. 6-8 メールアドレス未入力でログイン要求（異常系）
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "userEmail": "",
+  "userPassword": "password123"
+}
+
+###
+
+### No. 6-9 パスワード未入力でログイン要求（異常系）
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "userEmail": "user@example.com",
+  "userPassword": ""
+}
+
+###
+
+### No. 6-10 登録済みメールアドレスで新規会員登録要求（異常系）
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "userEmail": "user@example.com",
+  "userPassword": "newPassword123",
+  "userName": "別の名前",
+  "userAddress": "別の住所"
+}

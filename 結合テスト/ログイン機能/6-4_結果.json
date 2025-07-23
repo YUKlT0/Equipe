@@ -1,0 +1,13 @@
+HTTP/1.1 200 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 10:28:54 GMT
+Connection: close
+
+{
+  "name": "消費者 太郎",
+  "email": "user@example.com",
+  "address": "東京都品川区1-2-3",
+  "password": "userpass"
+}

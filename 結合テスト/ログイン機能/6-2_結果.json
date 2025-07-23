@@ -1,0 +1,12 @@
+HTTP/1.1 200 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 10:14:29 GMT
+Connection: close
+
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNzUzMjY2NTY5fQ.SRXJw4fcqSfJ5rQd5EqG5gEVR_iOO2h7_9auPq6hEiY",
+  "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNzUzNTI0ODY5fQ.LI21gnOov9ItjEegOL0VaIfxg2mvdrG04iV4_31q1KQ",
+  "userId": 2
+}

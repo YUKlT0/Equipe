@@ -1,0 +1,9 @@
+HTTP/1.1 400 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 30
+Date: Wed, 23 Jul 2025 09:05:34 GMT
+Connection: close
+
+パスワードは必須です
+
