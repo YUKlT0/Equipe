@@ -1,4 +1,4 @@
-### 2-1
+### 2-1空のカートに初めて商品を追加する
 POST http://localhost:8080/api/cart
 content-type: application/json
 
@@ -7,7 +7,7 @@ content-type: application/json
     "quantity": 2
 }
 
-### 2-2
+### 2-2カートに存在する商品と同じ商品を更に追加する
 POST http://localhost:8080/api/cart
 content-type: application/json
 
@@ -16,7 +16,7 @@ content-type: application/json
     "quantity": 1
 }
 
-### 2-3
+### 2-3カートに存在する商品と別の商品を追加する
 POST http://localhost:8080/api/cart
 content-type: application/json
 
@@ -25,7 +25,7 @@ content-type: application/json
     "quantity": 1
 }
 
-### 2-4
+### 2-4カート内の商品の数量を変更する
 PUT http://localhost:8080/api/cart/items/1
 content-type: application/json
 
@@ -34,101 +34,97 @@ content-type: application/json
     "quantity": 5
 }
 
-### 2-5
+### 2-5カート内の商品を削除する
 DELETE http://localhost:8080/api/cart/items/1
+
+
+### 2-6カートが空の状態でカート情報を取得する
+GET http://localhost:8080/api/cart
+
+
+### 2-7商品が複数入ったカート情報を取得する
+GET http://localhost:8080/api/cart
+
+### 2-8存在しない商品をカートに追加しようとする
+POST http://localhost:8080/api/cart
+Content-Type: application/json
+
+{
+    "productId": 999,
+    "quantity": 1
+}
+
+### 2-9カート追加時に数量0を指定する
+POST http://localhost:8080/api/cart
 content-type: application/json
 
 {
-    "itemId": 1, 
+    "productId": 1,
+    "quantity": 0
 }
 
-### 2-6
-GET http://localhost:8080/api/cart
-
-{
-    
-}
-
-### 2-7
-GET http://localhost:8080/api/cart
-
-{
-    
-}
-
-### 2-8
-GET http://localhost:8080/api/cart
-
-{
-    
-}
-
-### 2-9
+### 2-10カート追加時に数量に負数を指定する
 POST http://localhost:8080/api/cart
-
-{
-    
-}
-
-### 2-10
-POST http://localhost:8080/api/cart
+content-type: application/json
 
 {    
     "productId": 1, 
-    "quantity": -1,
+    "quantity": -1
     }
 
-### 2-11
+### 2-11カート追加時に数量をnullで指定する
 POST http://localhost:8080/api/cart
+content-type: application/json
 
 {    
     "productId": 1, 
-    "quantity": null,
+    "quantity": null
     }
 
-### 2-12
+### 2-12カート追加時に商品IDをnullで指定する
 POST http://localhost:8080/api/cart
+content-type: application/json
 
 {    
     "productId": null, 
-    "quantity": 1,
+    "quantity": 1
     }
 
-### 2-13
-POST http://localhost:8080/api/cart/items/1
-
-{    
-    "itemId": 1, 
-    "quantity": 0,
-    }
-
-### 2-14
+### 2-13カート数量更新時に数量0を指定する
 PUT http://localhost:8080/api/cart/items/1
+content-type: application/json
 
 {    
     "itemId": 1, 
-    "quantity": -1,
+    "quantity": 0
     }
 
-### 2-15
+### 2-14カート数量更新時に数量に負数を指定する
 PUT http://localhost:8080/api/cart/items/1
+content-type: application/json
 
 {    
     "itemId": 1, 
-    "quantity": null,
+    "quantity": -1
     }
 
-### 2-16
+### 2-15カート数量更新時に数量をnullで指定する
+PUT http://localhost:8080/api/cart/items/1
+content-type: application/json
+
+{    
+    "itemId": 1, 
+    "quantity": null
+    }
+
+### 2-16存在しない商品IDで数量を更新しようとする
 PUT http://localhost:8080/api/cart/items/999
+content-type: application/json
 
 {    
     "itemId": 999, 
-    "quantity": 5,
+    "quantity": 5
     }
 
-### 2-17
+### 2-17存在しない商品IDで商品を削除しようとする
 DELETE  http://localhost:8080/api/cart/items/999
-
-{    
-    "itemId": 999, 
-    }
