@@ -1,0 +1,17 @@
+### 商品一覧取得 1-1
+GET http://localhost:8080/api/products
+
+### 商品詳細取得 1-2
+GET http://localhost:8080/api/products/1
+
+### 商品詳細取得 1-3（存在しないID指定 → 404 Not Found）
+GET http://localhost:8080/api/products/999
+
+### 商品詳細取得 1-4（不正な形式のID → 400 or 500）
+GET http://localhost:8080/api/products/abc
+
+### 商品一覧取得 1-5（商品データが0件 → 空配列）
+GET http://localhost:8080/api/products
+
+### 商品詳細取得 1-6（description, imageUrl が null）
+GET http://localhost:8080/api/products/3
