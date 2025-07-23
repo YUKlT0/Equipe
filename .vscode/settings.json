@@ -1,3 +1,11 @@
 {
+<<<<<<< HEAD
     "java.compile.nullAnalysis.mode": "automatic"
+=======
+<<<<<<< Updated upstream
+    "java.compile.nullAnalysis.mode": "automatic",
+=======
+>>>>>>> Stashed changes
+    "java.configuration.updateBuildConfiguration": "interactive"
+>>>>>>> fa50afbb43c7570f7c7efdc4a328b80f7789b9b2
 }
