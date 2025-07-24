@@ -1,36 +1,27 @@
 HTTP/1.1 200 
 Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Set-Cookie: JSESSIONID=3C7807AC5BC2DFE452D286F8DD57C868; Path=/; HttpOnly
 Content-Type: application/json
 Transfer-Encoding: chunked
-Date: Wed, 23 Jul 2025 09:57:22 GMT
+Date: Thu, 24 Jul 2025 04:33:05 GMT
 Connection: close
 
 {
   "items": {
-    "2": {
-      "id": "2",
-      "productId": 2,
-      "name": "アロマディフューザー（ウッド）",
-      "price": 4200,
-      "imageUrl": "/images/aroma-diffuser.png",
-      "quantity": 2,
-      "subtotal": 8400
-    },
     "1": {
       "id": "1",
       "productId": 1,
       "name": "シンプルデスクオーガナイザー",
       "price": 3500,
       "imageUrl": "/images/desk-organizer.png",
-      "quantity": 4,
-      "subtotal": 14000
+      "quantity": 2,
+      "subtotal": 7000
     }
   },
-  "totalQuantity": 6,
-  "totalPrice": 22400,
+  "totalQuantity": 2,
+  "totalPrice": 7000,
   "cartId": null,
   "userId": null,
   "createdAt": null,
   "updatedAt": null
 }
-

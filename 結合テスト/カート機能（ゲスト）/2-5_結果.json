@@ -13,12 +13,12 @@ Connection: close
       "name": "アロマディフューザー（ウッド）",
       "price": 4200,
       "imageUrl": "/images/aroma-diffuser.png",
-      "quantity": 2,
-      "subtotal": 8400
+      "quantity": 1,
+      "subtotal": 4200
     }
   },
-  "totalQuantity": 2,
-  "totalPrice": 8400,
+  "totalQuantity": 1,
+  "totalPrice": 4200,
   "cartId": null,
   "userId": null,
   "createdAt": null,
