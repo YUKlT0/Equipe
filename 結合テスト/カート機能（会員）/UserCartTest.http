@@ -3,8 +3,8 @@ POST http://localhost:8080/api/auth/login
 content-type: application/json
 
 {
-    "loginEmail": "mailA@test.com",
-    "loginPass": "testpassA"
+    "loginEmail": "user@example.com",
+    "loginPassword": "userpass"
 }
 
 ### カート取得
@@ -75,7 +75,7 @@ content-type: application/json
     "quantity": null
 }
 
-### 商品をカートに追加（商品IDnull）
+### 商品をカートに追加（商品IDがnull）
 POST http://localhost:8080/api/usercart?userId=1
 content-type: application/json
 
@@ -118,23 +118,3 @@ content-type: application/json
 
 ### カート内商品の削除（存在しない商品ID）
 DELETE http://localhost:8080/api/usercart/items/100?userId=1
-
-### 注文
-POST http://localhost:8080/api/orders
-content-type: application/json
-
-
-{"customerInfo":{
-        "customerName": "テスト",
-        "customerAddress": "購入者住所",
-        "customerEmail": "t@e.com",
-        "shippingName": "配送先氏名",
-        "shippingAddress": "住所",
-        "payMethod": "cod"},
-  "items": [
-    {
-        "productId": 7,
-        "quantity": 6
-    }
-  ]
-}
