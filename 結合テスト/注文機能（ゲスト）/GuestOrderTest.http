@@ -61,7 +61,7 @@ content-type: application/json
         "payMethod": "cod"},
   "items": [
     {
-        "productId": 7,
+        "productId": 1,
         "quantity": 6
     }
   ]
@@ -82,7 +82,7 @@ content-type: application/json
         "payMethod": "cod"},
   "items": [
     {
-        "productId": 7,
+        "productId": 1,
         "quantity": 6
     }
   ]
@@ -147,7 +147,7 @@ content-type: application/json
         "payMethod": "cod"},
   "items": [
     {
-        "productId": 7,
+        "productId": 1,
         "quantity": 6
     }
   ]
@@ -168,7 +168,7 @@ Content-Type: application/json
   },
   "items": [
     {
-      "productId": 7,
+      "productId": 1,
       "quantity": 6
     }
   ]
