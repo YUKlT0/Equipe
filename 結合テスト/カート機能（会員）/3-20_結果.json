@@ -1,0 +1,5 @@
+Request URL http://localhost:8080/api/usercart?userId=1
+Request Method  GET
+Status Code 401 Unauthorized
+Remote Address  [::1]:8080
+Referrer Policy strict-origin-when-cross-origin
