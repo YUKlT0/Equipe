@@ -12,7 +12,7 @@ content-type: application/json
 GET http://localhost:8080/api/cart
 
 
-### 注文 4-1 201 ☆
+### 注文 4-1 201 
 POST http://localhost:8080/api/orders
 content-type: application/json
 
@@ -26,7 +26,7 @@ content-type: application/json
         "payMethod": "cod"},
   "items": [
     {
-        "productId": 7,
+        "productId": 1,
         "quantity": 6
     }
   ]
@@ -137,7 +137,7 @@ content-type: application/json
 }
 
 
-### 注文 4-7　☆ 400
+### 注文 4-7　400
 POST http://localhost:8080/api/orders
 content-type: application/json
 
