@@ -1,3 +1,5 @@
+### カート取得
+GET http://localhost:8080/api/cart
 
 ### カートに追加
 POST http://localhost:8080/api/cart
@@ -8,8 +10,36 @@ content-type: application/json
     "quantity": 2
 }
 
-### カート取得
-GET http://localhost:8080/api/cart
+### 商品2を追加 (4-2分)
+POST http://localhost:8080/api/cart
+content-type: application/json
+
+{
+    "productId": 2,
+    "quantity": 3
+}
+
+### 存在しない商品をカートに追加
+POST http://localhost:8080/api/cart
+content-type: application/json
+
+{
+    "productId": 11,
+    "quantity": 1
+}
+
+
+
+### カートに追加　(4-5分)
+POST http://localhost:8080/api/cart
+content-type: application/json
+
+{
+    "productId": 1, 
+    "quantity": 21
+}
+
+
 
 
 ### 注文 4-1 201 
@@ -23,7 +53,7 @@ content-type: application/json
         "customerEmail": "t@e.com",
         "shippingName": "配送先氏名",
         "shippingAddress": "住所",
-        "payMethod": "cod"},
+        "payMethod": "cod"}
 }
 
 ### 注文 4-2 201
@@ -52,7 +82,7 @@ content-type: application/json
         "customerEmail": "t@e.com",
         "shippingName": "配送先氏名",
         "shippingAddress": "住所",
-        "payMethod": "cod"},
+        "payMethod": "cod"}
 }
 
 
@@ -67,7 +97,7 @@ content-type: application/json
         "customerEmail": "t@e.com",
         "shippingName": "配送先氏名",
         "shippingAddress": "住所",
-        "payMethod": "cod"},
+        "payMethod": "cod"}
 }
 
 
@@ -85,38 +115,41 @@ content-type: application/json
     "shippingAddress": "東京都千代田区テスト1-1",
     "payMethod": "CASH_ON_DELIVERY"
   }
- 
 }
+### 注文 4-6 500
+POST http://localhost:8080/api/orders
+content-type: application/json
 
 {
   "customerInfo": {
-    "customerName": "顧客 一郎",
-    "customerEmail": "ichiro@test.com",
-    "customerAddress": "東京都千代田区テスト1-1"
+    "customerName": "テスト",
+    "customerAddress": "購入者住所",
+    "customerEmail": "t@e.com",
+    "shippingName": "配送先氏名",
+    "shippingAddress": "住所",
+    "payMethod": "cod"
   },
-  "paymentMethod": "BANK_TRANSFER",
   "items": [
     {
-      "productId": 999,
+      "productId": 11,
       "quantity": 1
     }
   ]
 }
 
-
-
-### 注文 4-7　400
+### 注文 4-7 400
 POST http://localhost:8080/api/orders
 content-type: application/json
 
-
-{"customerInfo":{
-        "customerName": "テスト",
-        "customerAddress": "購入者住所",
-        "customerEmail": "t@e.com",
-        "shippingName": "配送先氏名",
-        "shippingAddress": "住所",
-        "payMethod": "cod"},
+{
+  "customerInfo": {
+    "customerName": "",
+    "customerAddress": "購入者住所",
+    "customerEmail": "t@e.com",
+    "shippingName": "配送先氏名",
+    "shippingAddress": "住所",
+    "payMethod": "cod"
+  }
 }
 
 ### 注文 4-8 400
@@ -131,15 +164,14 @@ Content-Type: application/json
     "shippingName": "配送先氏名",
     "shippingAddress": "住所",
     "payMethod": "cod"
-  },
+  }
 }
-
 
 ### 注文 4-9 400
 POST http://localhost:8080/api/orders
-content-type: application/json
+Content-Type: application/json
 
-{"customerInfo":}
+
 
 ### 注文 4-10 500
 POST http://localhost:8080/api/orders
@@ -153,7 +185,7 @@ Content-Type: application/json
     "shippingName": "配送先氏名",
     "shippingAddress": "住所",
     "payMethod": "cod"
-  },
+  }
 }
 
 ### 注文 4-11 500
@@ -168,7 +200,7 @@ Content-Type: application/json
     "shippingName": "配送先氏名",
     "shippingAddress": "住所",
     "payMethod": "cod"
-  },
+  }
 }
 
 ### 注文 4-12 500
@@ -183,5 +215,5 @@ Content-Type: application/json
     "shippingName": "配送先氏名",
     "shippingAddress": "住所",
     "payMethod": "cod"
-  },
+  }
 }
