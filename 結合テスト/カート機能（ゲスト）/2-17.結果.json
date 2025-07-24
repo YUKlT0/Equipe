@@ -2,23 +2,23 @@ HTTP/1.1 200
 Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
 Content-Type: application/json
 Transfer-Encoding: chunked
-Date: Wed, 23 Jul 2025 10:21:41 GMT
+Date: Thu, 24 Jul 2025 13:06:32 GMT
 Connection: close
 
 {
   "items": {
-    "2": {
-      "id": "2",
-      "productId": 2,
-      "name": "アロマディフューザー（ウッド）",
-      "price": 4200,
-      "imageUrl": "/images/aroma-diffuser.png",
+    "1": {
+      "id": "1",
+      "productId": 1,
+      "name": "シンプルデスクオーガナイザー",
+      "price": 3500,
+      "imageUrl": "/images/desk-organizer.png",
       "quantity": 2,
-      "subtotal": 8400
+      "subtotal": 7000
     }
   },
   "totalQuantity": 2,
-  "totalPrice": 8400,
+  "totalPrice": 7000,
   "cartId": null,
   "userId": null,
   "createdAt": null,
