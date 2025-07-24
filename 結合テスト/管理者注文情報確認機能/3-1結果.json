@@ -1,0 +1,30 @@
+HTTP/1.1 200 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 24 Jul 2025 01:34:37 GMT
+Connection: close
+
+[
+  {
+    "orderId": "1",
+    "buyerName": "消費者 太郎",
+    "orderDate": "2025-07-24T10:26:55.311699",
+    "totalPrice": 3500,
+    "status": "PENDING"
+  },
+  {
+    "orderId": "2",
+    "buyerName": "消費者 太郎",
+    "orderDate": "2025-07-24T10:27:07.388260",
+    "totalPrice": 4200,
+    "status": "PENDING"
+  },
+  {
+    "orderId": "3",
+    "buyerName": "消費者 太郎",
+    "orderDate": "2025-07-24T10:27:31.081250",
+    "totalPrice": 8600,
+    "status": "PENDING"
+  }
+]
