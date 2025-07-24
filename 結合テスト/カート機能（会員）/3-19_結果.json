@@ -1,0 +1,26 @@
+HTTP/1.1 200 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 09:40:02 GMT
+Connection: close
+
+{
+  "items": {
+    "1": {
+      "id": "1",
+      "productId": 1,
+      "name": "商品A",
+      "price": 1000,
+      "imageUrl": "/imgA.png",
+      "quantity": 1,
+      "subtotal": 1000
+    }
+  },
+  "totalQuantity": 1,
+  "totalPrice": 1000,
+  "cartId": 1,
+  "userId": 1,
+  "createdAt": "2025-07-23T18:37:40.652287",
+  "updatedAt": "2025-07-23T18:39:21.848714"
+}
