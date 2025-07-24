@@ -1,0 +1,24 @@
+HTTP/1.1 200 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 24 Jul 2025 01:27:38 GMT
+Connection: close
+
+{
+  "orderId": "1",
+  "buyerName": "消費者 太郎",
+  "shippingAddress": "a",
+  "items": [
+    {
+      "productName": "シンプルデスクオーガナイザー",
+      "quantity": 1,
+      "unitPrice": 3500.00,
+      "subtotal": 3500.00
+    }
+  ],
+  "totalPrice": 3500,
+  "customerEmail": "user@example.com",
+  "orderDate": "2025-07-24T10:26:55.311699",
+  "status": "PENDING"
+}
