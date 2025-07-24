@@ -1,7 +1,5 @@
 HTTP/1.1 400 
 Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
-Set-Cookie: JSESSIONID=E470C42B4AF8D8A23C2060DA18E9A985; Path=/; HttpOnly
 Content-Length: 0
-Date: Thu, 24 Jul 2025 00:32:41 GMT
+Date: Thu, 24 Jul 2025 04:42:33 GMT
 Connection: close
-
