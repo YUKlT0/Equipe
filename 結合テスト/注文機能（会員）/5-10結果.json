@@ -1,0 +1,10 @@
+HTTP/1.1 400 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 25 Jul 2025 00:42:04 GMT
+Connection: close
+
+{
+  "customerInfo": "顧客情報は必須です"
+}
