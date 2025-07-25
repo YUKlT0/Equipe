@@ -33,18 +33,23 @@ GET /api/cart?userId=1
 =======
 
 ##5-2 
-### カートに複数種類の商品を追加
+### カートに1種類目の商品を追加
 POST http://localhost:8080/api/usercart?userId=1
 Content-Type: application/json
 
-{
+  {
   "productId": 6,
   "quantity": 2
 }
-{
+### カートに2種類目の商品を追加
+POST  http://localhost:8080/api/usercart?userId=1
+Content-Type: application/json
+
+  {
   "productId": 7,
   "quantity": 3
 }
+
 
 ### 注文を実行
 POST http://localhost:8080/api/user/orders?userId=1
@@ -63,7 +68,7 @@ Content-Type: application/json
 
 
 ##5-3 
-### カートに在庫数と同数の商品を追加
+### 在庫数と同数の商品をカートに追加
 POST http://localhost:8080/api/usercart?userId=1
 Content-Type: application/json
 
@@ -158,7 +163,29 @@ Content-Type: application/json
 
 
 ##5-7
-データローダーいじっていいのですか
+### 登録されていなの商品IDの商品を追加
+POST http://localhost:8080/api/usercart?userId=1
+Content-Type: application/json
+
+{
+  "productId": 100,
+  "quantity": 5
+}
+
+### 注文を実行
+POST http://localhost:8080/api/user/orders?userId=1
+Content-Type: application/json
+
+{
+  "customerInfo": {
+    "customerName": "消費者　太郎",
+    "customerAddress": "購入者住所",
+    "customerEmail": "t@e.com",
+    "shippingName": "配送先氏名",
+    "shippingAddress": "住所",
+    "payMethod": "cod"
+  }
+}
 
 
 ##5-8 
@@ -204,5 +231,9 @@ Content-Type: application/json
 
 
 ##5-11  
+<<<<<<< HEAD
+### 注文DB保存するとエラーが発生
+=======
 ### わからん
 >>>>>>> 65d1c860eadb3062cca8916ce34ada2f5974795c
+>>>>>>> 73c05edfb909bc13cd4fe572fa2f6388b2c0ae43
