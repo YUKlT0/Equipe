@@ -1,0 +1,30 @@
+HTTP/1.1 200 
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 25 Jul 2025 01:00:20 GMT
+Connection: close
+
+{
+  "orderId": 1,
+  "orderDate": "2025-07-25T10:00:20.6337682",
+  "totalPrice": 22000,
+  "status": "PENDING",
+  "userName": "消費者 太郎",
+  "userEmail": "user@example.com",
+  "shippingAddress": "住所",
+  "orderItems": [
+    {
+      "productName": "リネンクッションカバー",
+      "quantity": 4,
+      "unitPrice": 2500,
+      "subtotal": 10000
+    },
+    {
+      "productName": "陶器フラワーベース",
+      "quantity": 3,
+      "unitPrice": 4000,
+      "subtotal": 12000
+    }
+  ]
+}
