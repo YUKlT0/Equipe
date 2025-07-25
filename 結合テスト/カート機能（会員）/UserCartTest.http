@@ -1,3 +1,12 @@
+###　トークン生成
+POST http://localhost:8080/api/auth/login
+content-type: application/json
+
+{
+    "loginEmail": "user@example.com",
+    "loginPassword": "userpass"
+}
+
 ### カート取得
 GET http://localhost:8080/api/usercart?userId=1
 

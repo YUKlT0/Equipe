@@ -13,12 +13,12 @@ Connection: close
       "name": "シンプルデスクオーガナイザー",
       "price": 3500,
       "imageUrl": "/images/desk-organizer.png",
-      "quantity": 2,
+      "quantity": 3,
       "subtotal": 10500
     }
   },
-  "totalQuantity": 2,
-  "totalPrice": 7000,
+  "totalQuantity": 3,
+  "totalPrice": 10500,
   "cartId": null,
   "userId": null,
   "createdAt": null,

@@ -23,6 +23,14 @@ Content-Type: application/json
   }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+##5-2
+
+=======
+GET /api/cart?userId=1
+>>>>>>> cfdaee4318047dc1b7af5e4c2bdeded980eb78c8
+=======
 
 ##5-2 
 ### カートに1種類目の商品を追加
@@ -223,4 +231,9 @@ Content-Type: application/json
 
 
 ##5-11  
+<<<<<<< HEAD
 ### 注文DB保存するとエラーが発生
+=======
+### わからん
+>>>>>>> 65d1c860eadb3062cca8916ce34ada2f5974795c
+>>>>>>> 73c05edfb909bc13cd4fe572fa2f6388b2c0ae43

@@ -1,4 +1,4 @@
-### 2-1空のカートに初めて商品を追加する
+### 2-1空のカートに初めて商品を追加する 
 POST http://localhost:8080/api/cart
 content-type: application/json
 
@@ -7,7 +7,7 @@ content-type: application/json
     "quantity": 2
 }
 
-### 2-2カートに存在する商品と同じ商品を更に追加する
+### 2-2カートに存在する商品と同じ商品を更に追加する 
 POST http://localhost:8080/api/cart
 content-type: application/json
 
